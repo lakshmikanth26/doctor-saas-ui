@@ -10,6 +10,7 @@ const router = createRouter({
     { path: '/queue/:orgSlug', component: () => import('@/pages/QueueDisplayPage.vue'), meta: { public: true } },
     { path: '/portal', component: () => import('@/pages/portal/PatientPortal.vue'), meta: { public: true } },
     { path: '/portal/:orgSlug', component: () => import('@/pages/portal/PatientPortal.vue'), meta: { public: true } },
+    { path: '/payment/status', component: () => import('@/pages/PaymentStatusPage.vue'), meta: { public: true } },
 
     // App shell
     {

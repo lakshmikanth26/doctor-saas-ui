@@ -2,19 +2,19 @@
   <div class="min-h-screen flex flex-col" style="background:#0f172a; color:#e2e8f0; font-family:system-ui,sans-serif">
 
     <!-- Header -->
-    <header class="flex items-center justify-between px-8 py-5 shrink-0"
+    <header class="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 shrink-0"
       style="background:#111827; border-bottom:1px solid rgba(255,255,255,0.06)">
-      <div class="flex items-center gap-4">
-        <div class="w-11 h-11 rounded-2xl flex items-center justify-center text-2xl font-black text-white"
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl font-black text-white shrink-0"
           style="background:linear-gradient(135deg,#2563eb,#1d4ed8); box-shadow:0 4px 16px rgba(37,99,235,0.4)">⚕️</div>
         <div>
-          <div class="text-white font-black text-xl leading-none">Patient Queue</div>
-          <div class="text-slate-400 text-sm mt-0.5">{{ clinicName || route.params.orgSlug }}</div>
+          <div class="text-white font-black text-base sm:text-xl leading-none">Patient Queue</div>
+          <div class="text-slate-400 text-xs sm:text-sm mt-0.5 truncate max-w-[140px] sm:max-w-none">{{ clinicName || route.params.orgSlug }}</div>
         </div>
       </div>
-      <div class="text-right">
-        <div class="text-white font-mono text-3xl font-bold tracking-tight">{{ time }}</div>
-        <div class="text-slate-400 text-sm mt-0.5">{{ date }}</div>
+      <div class="text-right shrink-0">
+        <div class="text-white font-mono text-xl sm:text-3xl font-bold tracking-tight">{{ time }}</div>
+        <div class="text-slate-400 text-xs sm:text-sm mt-0.5 hidden sm:block">{{ date }}</div>
       </div>
     </header>
 
@@ -84,14 +84,14 @@
     </div>
 
     <!-- Footer -->
-    <footer class="px-8 py-4 flex items-center justify-between text-xs text-slate-600 shrink-0"
+    <footer class="px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between text-xs text-slate-600 shrink-0"
       style="border-top:1px solid rgba(255,255,255,0.04)">
       <span>{{ waitingQueue.length }} waiting · {{ currentToken ? '1 in progress' : 'none in progress' }}</span>
-      <span class="flex items-center gap-1.5">
+      <span class="flex items-center gap-1.5 hidden sm:flex">
         <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block"></span>
         Auto-refreshes every 30 seconds
       </span>
-      <span>Powered by <span class="text-slate-400 font-semibold">ClinicOS</span></span>
+      <span>Powered by <span class="text-slate-400 font-semibold">Mednest</span></span>
     </footer>
   </div>
 </template>
@@ -108,7 +108,7 @@ const time = ref('')
 const date = ref('')
 
 const currentToken  = computed(() => queue.value.find(a => a.status === 'IN_PROGRESS'))
-const waitingQueue  = computed(() => queue.value.filter(a => a.status === 'WAITING'))
+const waitingQueue  = computed(() => queue.value.filter(a => ['SCHEDULED', 'CONFIRMED', 'CHECKED_IN'].includes(a.status)))
 
 function updateClock() {
   const now = new Date()
@@ -116,9 +116,23 @@ function updateClock() {
   date.value = now.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+const DEMO_QUEUE = [
+  { id: 'dq1', tokenNumber: 4, status: 'IN_PROGRESS', patient: { firstName: 'Meena', lastName: 'Iyer' },   provider: { firstName: 'Arun', lastName: 'Mehta' } },
+  { id: 'dq2', tokenNumber: 5, status: 'CHECKED_IN',  patient: { firstName: 'Vikram', lastName: 'Das' },   provider: { firstName: 'Arun', lastName: 'Mehta' } },
+  { id: 'dq3', tokenNumber: 6, status: 'SCHEDULED',   patient: { firstName: 'Anita', lastName: 'Roy' },    provider: { firstName: 'Priya', lastName: 'Nair' } },
+  { id: 'dq4', tokenNumber: 7, status: 'SCHEDULED',   patient: { firstName: 'Ravi', lastName: 'Shankar' }, provider: { firstName: 'Rajesh', lastName: 'Kumar' } },
+  { id: 'dq5', tokenNumber: 8, status: 'SCHEDULED',   patient: { firstName: 'Sunita', lastName: 'Patel' }, provider: { firstName: 'Arun', lastName: 'Mehta' } },
+  { id: 'dq6', tokenNumber: 9, status: 'SCHEDULED',   patient: { firstName: 'Deepak', lastName: 'Gupta' }, provider: { firstName: 'Priya', lastName: 'Nair' } },
+]
+
 async function loadQueue() {
+  if (localStorage.getItem('demo_mode')) {
+    queue.value = DEMO_QUEUE
+    clinicName.value = 'Mednest Demo Clinic'
+    return
+  }
   const orgSlug = route.params.orgSlug
-  const url = orgSlug ? `/api/v1/appointments/queue?orgSlug=${orgSlug}` : '/api/v1/appointments/queue'
+  const url = orgSlug ? `/api/v1/appointments/queue/public?orgSlug=${orgSlug}` : '/api/v1/appointments/queue/public'
   const { data } = await axios.get(url).catch(() => ({ data: { data: [] } }))
   queue.value = data.data || []
 }

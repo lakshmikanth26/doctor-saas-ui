@@ -194,7 +194,7 @@
         <!-- Patient Portal shortcut -->
         <div class="mx-4 mb-4 rounded-xl overflow-hidden"
           style="background:linear-gradient(135deg,#1e3a5f,#172554); border:1px solid rgba(59,130,246,0.2)">
-          <RouterLink to="/portal" target="_blank" class="flex items-center gap-3 p-4 group">
+          <RouterLink v-if="auth.org?.slug" :to="`/portal/${auth.org.slug}`" target="_blank" class="flex items-center gap-3 p-4 group">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center"
               style="background:rgba(59,130,246,0.15)">
               <LinkIcon class="w-5 h-5 text-blue-400" />

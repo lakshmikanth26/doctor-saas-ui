@@ -3,7 +3,7 @@
     <div class="page-header">
       <h1 class="page-title">Website Builder</h1>
       <div class="flex gap-2">
-        <a v-if="site?.subdomain" :href="`https://${site.subdomain}.clinicos.app`" target="_blank" class="btn-secondary btn-sm">
+        <a v-if="site?.subdomain" :href="`https://${site.subdomain}.mednest.app`" target="_blank" class="btn-secondary btn-sm">
           🔗 Preview
         </a>
         <button @click="publish" class="btn-primary" :disabled="publishing">
@@ -29,7 +29,7 @@
         <div><label class="label">Subdomain</label>
           <div class="flex items-center">
             <input v-model="siteForm.subdomain" class="input rounded-r-none" placeholder="myclinic" />
-            <span class="bg-gray-100 border border-l-0 border-white/10 rounded-r-lg px-3 py-2 text-sm text-slate-500">.clinicos.app</span>
+            <span class="bg-gray-100 border border-l-0 border-white/10 rounded-r-lg px-3 py-2 text-sm text-slate-500">.mednest.app</span>
           </div>
         </div>
         <div><label class="label">Phone</label><input v-model="siteForm.phone" class="input" /></div>

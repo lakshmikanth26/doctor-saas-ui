@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
   function loginAsDemo() {
     const demoUser = {
       id: 'demo-user-id', firstName: 'Demo', lastName: 'Doctor',
-      email: 'demo@clinicos.in', role: 'DOCTOR', systemRole: 'CLINIC_ADMIN',
+      email: 'demo@mednest.in', role: 'DOCTOR', systemRole: 'CLINIC_ADMIN',
     }
     const demoOrg = {
       id: 'demo-org-id', name: 'City Medical Center',

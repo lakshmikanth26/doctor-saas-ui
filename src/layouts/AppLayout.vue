@@ -1,37 +1,46 @@
 <template>
   <div class="flex h-screen overflow-hidden" style="background:#0f172a">
+
+    <!-- Mobile backdrop -->
+    <div v-if="sidebarOpen && isMobile"
+      class="fixed inset-0 z-40 bg-black/60"
+      @click="sidebarOpen = false"
+    />
+
     <!-- Sidebar -->
     <aside
-      class="flex flex-col w-64 text-white shrink-0 transition-all duration-200"
+      class="flex flex-col w-64 text-white shrink-0 transition-transform duration-200"
       style="background:#111827; border-right:1px solid rgba(255,255,255,0.05)"
-      :class="{ '-translate-x-64 absolute z-50 h-full': !sidebarOpen, 'relative': sidebarOpen }"
+      :class="sidebarOpen
+        ? 'fixed lg:relative inset-y-0 left-0 z-50 translate-x-0'
+        : 'fixed lg:relative inset-y-0 left-0 z-50 -translate-x-full lg:translate-x-0'"
     >
       <!-- Logo -->
       <div class="flex items-center gap-3 px-6 py-5 border-b" style="border-color:rgba(255,255,255,0.06)">
-        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-sm">C</div>
+        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-sm">M</div>
         <div>
-          <div class="font-bold text-sm">ClinicOS</div>
+          <div class="font-bold text-sm">Mednest</div>
           <div class="text-xs text-slate-400 truncate max-w-[120px]">{{ auth.org?.name }}</div>
         </div>
       </div>
 
       <!-- Nav -->
       <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
-        <NavItem to="/dashboard"     :icon="HomeIcon"                    label="Dashboard" />
-        <NavItem to="/appointments"  :icon="CalendarDaysIcon"            label="Appointments" />
-        <NavItem to="/patients"      :icon="UserIcon"                    label="Patients" />
-        <NavItem to="/visits"        :icon="ClipboardDocumentListIcon"   label="EMR / Visits" />
-        <NavItem to="/prescriptions" :icon="BeakerIcon"                  label="Prescriptions" />
-        <NavItem to="/billing"       :icon="CurrencyDollarIcon"          label="Billing" />
-        <NavItem to="/inventory"     :icon="ArchiveBoxIcon"              label="Inventory" />
-        <NavItem to="/staff"         :icon="UsersIcon"                   label="Staff" />
-        <NavItem to="/website"       :icon="GlobeAltIcon"                label="Website Builder" />
+        <NavItem to="/dashboard"     :icon="HomeIcon"                    label="Dashboard"      @click="closeMobile" />
+        <NavItem to="/appointments"  :icon="CalendarDaysIcon"            label="Appointments"   @click="closeMobile" />
+        <NavItem to="/patients"      :icon="UserIcon"                    label="Patients"       @click="closeMobile" />
+        <NavItem to="/visits"        :icon="ClipboardDocumentListIcon"   label="EMR / Visits"   @click="closeMobile" />
+        <NavItem to="/prescriptions" :icon="BeakerIcon"                  label="Prescriptions"  @click="closeMobile" />
+        <NavItem to="/billing"       :icon="CurrencyDollarIcon"          label="Billing"        @click="closeMobile" />
+        <NavItem to="/inventory"     :icon="ArchiveBoxIcon"              label="Inventory"      @click="closeMobile" />
+        <NavItem to="/staff"         :icon="UsersIcon"                   label="Staff"          @click="closeMobile" />
+        <NavItem to="/website"       :icon="GlobeAltIcon"                label="Website Builder" @click="closeMobile" />
         <div v-if="auth.isSystemAdmin" class="pt-2 mt-2 border-t border-white/5">
           <p class="px-3 text-xs text-slate-500 uppercase tracking-wider mb-1">Admin</p>
-          <NavItem to="/crm" :icon="ChartBarIcon" label="CRM" />
+          <NavItem to="/crm" :icon="ChartBarIcon" label="CRM" @click="closeMobile" />
         </div>
         <div class="pt-2 mt-2 border-t border-white/5">
-          <NavItem to="/settings" :icon="Cog6ToothIcon" label="Settings" />
+          <NavItem to="/settings" :icon="Cog6ToothIcon" label="Settings" @click="closeMobile" />
         </div>
       </nav>
 
@@ -53,16 +62,16 @@
     </aside>
 
     <!-- Main -->
-    <div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex-1 flex flex-col overflow-hidden min-w-0">
       <!-- Topbar -->
-      <header class="px-6 py-3 flex items-center justify-between shrink-0"
+      <header class="px-4 py-3 flex items-center gap-3 shrink-0"
         style="background:#111827; border-bottom:1px solid rgba(255,255,255,0.05)">
-        <button @click="sidebarOpen = !sidebarOpen" class="text-slate-400 hover:text-white lg:hidden">
+        <button @click="sidebarOpen = !sidebarOpen" class="text-slate-400 hover:text-white lg:hidden shrink-0">
           <Bars3Icon class="w-5 h-5" />
         </button>
-        <div class="flex items-center gap-3 ml-auto">
+        <div class="flex items-center gap-2 ml-auto">
           <RouterLink to="/appointments" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
-            <SignalIcon class="w-4 h-4" /> Live Queue
+            <SignalIcon class="w-4 h-4" /><span class="hidden sm:inline">Live Queue</span>
           </RouterLink>
           <RouterLink
             v-if="auth.org?.slug"
@@ -71,13 +80,13 @@
             class="text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"
             style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.08)"
           >
-            <TvIcon class="w-3.5 h-3.5" /> Queue Display
+            <TvIcon class="w-3.5 h-3.5" /><span class="hidden sm:inline">Queue Display</span>
           </RouterLink>
         </div>
       </header>
 
       <!-- Page content -->
-      <main class="flex-1 overflow-y-auto p-6" style="background:#0f172a">
+      <main class="flex-1 overflow-y-auto p-4 lg:p-6" style="background:#0f172a">
         <RouterView />
       </main>
     </div>
@@ -88,7 +97,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useDemoStore } from '@/stores/demo'
 import NavItem from '@/components/NavItem.vue'
@@ -102,7 +111,23 @@ import {
 
 const auth = useAuthStore()
 const demo = useDemoStore()
-const sidebarOpen = ref(true)
 
-onMounted(() => demo.resume())
+const windowWidth = ref(window.innerWidth)
+const isMobile = computed(() => windowWidth.value < 1024)
+const sidebarOpen = ref(windowWidth.value >= 1024)
+
+function onResize() {
+  windowWidth.value = window.innerWidth
+  if (windowWidth.value >= 1024) sidebarOpen.value = true
+}
+
+function closeMobile() {
+  if (isMobile.value) sidebarOpen.value = false
+}
+
+onMounted(() => {
+  demo.resume()
+  window.addEventListener('resize', onResize)
+})
+onUnmounted(() => window.removeEventListener('resize', onResize))
 </script>

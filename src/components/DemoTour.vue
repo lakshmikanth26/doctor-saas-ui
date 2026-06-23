@@ -1,20 +1,94 @@
 <template>
   <Teleport to="body">
     <Transition name="tour">
-      <div v-if="demo.active" class="fixed z-[9999] bottom-6 right-6 select-none">
+      <div v-if="demo.active" class="fixed z-[9999] select-none
+        bottom-0 left-0 right-0
+        sm:bottom-6 sm:right-6 sm:left-auto sm:w-[380px]">
 
-        <!-- Minimised pill -->
+        <!-- Minimised pill — desktop only position, mobile stays bottom-right inline -->
         <div v-if="demo.minimised"
           @click="demo.minimised = false"
-          class="flex items-center gap-2 bg-gray-900 text-white px-4 py-2.5 rounded-full shadow-2xl cursor-pointer hover:bg-gray-800 transition-colors border border-gray-700">
+          class="flex items-center gap-2 bg-gray-900 text-white px-4 py-2.5 rounded-full shadow-2xl cursor-pointer hover:bg-gray-800 transition-colors border border-gray-700
+          mx-4 mb-3 w-fit ml-auto">
           <span class="text-lg">{{ demo.currentStep.icon }}</span>
           <span class="text-sm font-semibold">Demo Tour</span>
           <span class="text-xs text-gray-400">{{ demo.step + 1 }}/{{ totalSteps }}</span>
           <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse ml-1"></span>
         </div>
 
-        <!-- Full card -->
-        <div v-else class="w-[380px] bg-gray-900 rounded-3xl shadow-2xl border border-gray-700/60 overflow-hidden">
+        <!-- ── Mobile compact bar (hidden on sm+) ── -->
+        <div v-else-if="!mobileExpanded" class="sm:hidden bg-gray-900 border-t border-gray-700/80 shadow-2xl">
+          <!-- Progress strip -->
+          <div class="h-0.5 bg-gray-800">
+            <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500" :style="{ width: demo.progress + '%' }"></div>
+          </div>
+          <div class="flex items-center gap-3 px-4 py-3">
+            <span class="text-xl shrink-0">{{ demo.currentStep.icon }}</span>
+            <div class="flex-1 min-w-0" @click="mobileExpanded = true">
+              <p class="text-white text-xs font-bold truncate">{{ demo.currentStep.title }}</p>
+              <p class="text-blue-400 text-[10px] mt-0.5">Tap to read more</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button @click="handlePrev" :disabled="demo.isFirst"
+                class="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold transition-all"
+                :class="demo.isFirst ? 'text-gray-700' : 'bg-gray-800 text-white'">←</button>
+              <button v-if="!demo.isLast" @click="handleNext"
+                class="h-8 px-3 rounded-xl text-xs font-bold bg-blue-600 text-white">Next →</button>
+              <button v-else @click="exitDemo"
+                class="h-8 px-3 rounded-xl text-xs font-bold bg-green-600 text-white">Done ✓</button>
+              <button @click="demo.stop()" class="w-8 h-8 rounded-xl flex items-center justify-center text-gray-500">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Mobile expanded sheet (hidden on sm+) ── -->
+        <div v-else-if="mobileExpanded" class="sm:hidden bg-gray-900 border-t border-gray-700/80 shadow-2xl rounded-t-2xl">
+          <!-- Progress strip -->
+          <div class="h-0.5 bg-gray-800 rounded-t-2xl">
+            <div class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500" :style="{ width: demo.progress + '%' }"></div>
+          </div>
+          <!-- Handle + collapse -->
+          <div class="flex items-center justify-between px-4 pt-3 pb-1">
+            <span class="text-xs text-gray-500 font-semibold uppercase tracking-widest">Step {{ demo.step + 1 }} of {{ totalSteps }}</span>
+            <button @click="mobileExpanded = false" class="text-gray-400 text-xs flex items-center gap-1">Collapse ↓</button>
+          </div>
+          <div class="px-4 pb-2">
+            <Transition name="step-fade" mode="out-in">
+              <div :key="demo.step">
+                <div class="flex items-start gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-2xl flex items-center justify-center text-xl shrink-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/20">
+                    {{ demo.currentStep.icon }}
+                  </div>
+                  <h3 class="text-white font-bold text-sm leading-snug pt-1">{{ demo.currentStep.title }}</h3>
+                </div>
+                <p class="text-gray-300 text-sm leading-relaxed mb-3">{{ demo.currentStep.insight }}</p>
+                <div class="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-xl px-3 py-2">
+                  <span class="text-yellow-400 text-xs shrink-0">💡</span>
+                  <p class="text-yellow-200/80 text-xs leading-relaxed">{{ demo.currentStep.tip }}</p>
+                </div>
+              </div>
+            </Transition>
+          </div>
+          <div class="flex items-center gap-3 px-4 py-3 border-t border-gray-800">
+            <button @click="handlePrev" :disabled="demo.isFirst"
+              class="px-4 py-2 rounded-xl text-sm font-semibold transition-all"
+              :class="demo.isFirst ? 'text-gray-700' : 'text-gray-300 bg-gray-800'">← Back</button>
+            <div class="flex-1"></div>
+            <button v-if="!demo.isLast" @click="handleNext"
+              class="px-5 py-2 rounded-xl text-sm font-bold bg-blue-600 text-white">Next →</button>
+            <button v-else @click="exitDemo"
+              class="px-5 py-2 rounded-xl text-sm font-bold bg-green-600 text-white">Finish ✓</button>
+          </div>
+          <div v-if="!isRegisterPage" class="px-4 pb-4">
+            <RouterLink to="/register" @click="demo.stop()"
+              class="block text-center py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              Start Your Free Clinic — 14 Days Free →
+            </RouterLink>
+          </div>
+        </div>
+
+        <!-- ── Desktop full card (hidden below sm) ── -->
+        <div v-if="!demo.minimised" class="hidden sm:block bg-gray-900 rounded-3xl shadow-2xl border border-gray-700/60 overflow-hidden">
 
           <!-- Header bar -->
           <div class="flex items-center justify-between px-5 py-3 border-b border-gray-800">
@@ -105,7 +179,7 @@
           </div>
 
           <!-- Exit CTA -->
-          <div class="px-5 pb-4">
+          <div v-if="!isRegisterPage" class="px-5 pb-4">
             <RouterLink to="/register"
               @click="demo.stop()"
               class="block text-center py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:opacity-90 transition-opacity shadow-lg">
@@ -120,27 +194,34 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useDemoStore, DEMO_STEPS } from '@/stores/demo'
 
 const demo = useDemoStore()
 const router = useRouter()
+const route = useRoute()
 
+const mobileExpanded = ref(false)
 const totalSteps = DEMO_STEPS.length
 const steps = DEMO_STEPS
 
+const isRegisterPage = computed(() => route.path === '/register')
+
 function navigateTo(idx) {
+  mobileExpanded.value = false
   demo.goTo(idx)
   router.push(DEMO_STEPS[idx].path)
 }
 
 function handleNext() {
+  mobileExpanded.value = false
   demo.next()
   router.push(demo.currentStep.path)
 }
 
 function handlePrev() {
+  mobileExpanded.value = false
   demo.prev()
   router.push(demo.currentStep.path)
 }
