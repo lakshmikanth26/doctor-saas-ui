@@ -1,0 +1,41 @@
+src/pages/RegisterPage.vue
+  1676d769c1495538 13,17,34,47
+src/pages/website/WebsitePage.vue
+  1676d769c1495538 6,32
+src/stores/demo.js
+  1676d769c1495538 18,44,88,104
+src/layouts/AppLayout.vue
+  1676d769c1495538 20,22
+src/pages/LoginPage.vue
+  1676d769c1495538 17,22,67
+index.html
+  1676d769c1495538 6-7
+src/pages/QueueDisplayPage.vue
+  1676d769c1495538 94,132
+src/stores/auth.js
+  1676d769c1495538 30
+src/pages/LandingPage.vue
+  1676d769c1495538 78,91,359,404,441,554,556,561,662,726,741
+src/pages/portal/PatientPortal.vue
+  1676d769c1495538 11-12,412
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "2572fe71288ff0af55352794c2836728a3040007",
+  "prompts": {
+    "1676d769c1495538": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "37643a25-050a-4a44-91f9-294760856c0d",
+        "model": "composer-2.5"
+      },
+      "human_author": "Lakshmikanth <lakshmikanth.d@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 823,
+      "total_deletions": 35,
+      "accepted_lines": 819,
+      "overriden_lines": 0
+    }
+  }
+}
