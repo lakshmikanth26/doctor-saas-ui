@@ -1,0 +1,23 @@
+vercel.json
+  1676d769c1495538 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "1d659a3e15d3a3000edb0e01b960f01ae79d3703",
+  "prompts": {
+    "1676d769c1495538": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "37643a25-050a-4a44-91f9-294760856c0d",
+        "model": "composer-2.5"
+      },
+      "human_author": "Lakshmikanth <lakshmikanth.d@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 0,
+      "accepted_lines": 5,
+      "overriden_lines": 0
+    }
+  }
+}
