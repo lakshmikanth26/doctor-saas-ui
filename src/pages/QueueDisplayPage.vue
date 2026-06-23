@@ -5,8 +5,7 @@
     <header class="flex items-center justify-between px-4 sm:px-8 py-4 sm:py-5 shrink-0"
       style="background:#111827; border-bottom:1px solid rgba(255,255,255,0.06)">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl font-black text-white shrink-0"
-          style="background:linear-gradient(135deg,#2563eb,#1d4ed8); box-shadow:0 4px 16px rgba(37,99,235,0.4)">⚕️</div>
+        <ClinovaMark :size="44" />
         <div>
           <div class="text-white font-black text-base sm:text-xl leading-none">Patient Queue</div>
           <div class="text-slate-400 text-xs sm:text-sm mt-0.5 truncate max-w-[140px] sm:max-w-none">{{ clinicName || route.params.orgSlug }}</div>
@@ -101,6 +100,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import { getApiBaseUrl } from '@/lib/apiBase.js'
+import ClinovaMark from '@/components/ClinovaMark.vue'
 
 const route = useRoute()
 const queue = ref([])

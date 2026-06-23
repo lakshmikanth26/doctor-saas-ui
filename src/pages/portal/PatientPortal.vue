@@ -5,12 +5,13 @@
     <header style="background:#111827; border-bottom:1px solid rgba(255,255,255,0.06)">
       <div class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-base"
-            style="background:linear-gradient(135deg,#2563eb,#1d4ed8); box-shadow:0 4px 12px rgba(37,99,235,0.35)">C</div>
-          <div>
-            <div class="text-white font-black text-base leading-none">Clinova</div>
-            <div class="text-slate-400 text-xs mt-0.5">{{ orgSlug ? `Booking · ${orgSlug}` : 'A new generation of clinical care' }}</div>
-          </div>
+          <BrandLogo
+            :size="36"
+            name-class="text-white font-black text-base leading-none"
+            :show-tagline="true"
+            :tagline="orgSlug ? `Booking · ${orgSlug}` : 'A new generation of clinical care'"
+            tagline-class="text-slate-400 text-xs mt-0.5"
+          />
         </div>
         <div class="text-right">
           <div class="text-white font-mono text-lg font-bold">{{ time }}</div>
@@ -422,6 +423,7 @@ import axios from 'axios'
 import { getApiBaseUrl } from '@/lib/apiBase.js'
 import { launchCashfreeCheckout } from '@/composables/useCashfree'
 import { localTodayIso, normalizeSlots, generateDefaultSlots, isPastSlot } from '@/lib/slots'
+import BrandLogo from '@/components/BrandLogo.vue'
 
 const route   = useRoute()
 const router  = useRouter()

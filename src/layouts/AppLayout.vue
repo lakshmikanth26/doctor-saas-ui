@@ -16,12 +16,14 @@
         : 'fixed lg:relative inset-y-0 left-0 z-50 -translate-x-full lg:translate-x-0'"
     >
       <!-- Logo -->
-      <div class="flex items-center gap-3 px-6 py-5 border-b" style="border-color:rgba(255,255,255,0.06)">
-        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-sm">C</div>
-        <div>
-          <div class="font-bold text-sm">Clinova</div>
-          <div class="text-xs text-slate-400 truncate max-w-[120px]">{{ auth.org?.name }}</div>
-        </div>
+      <div class="px-6 py-5 border-b" style="border-color:rgba(255,255,255,0.06)">
+        <BrandLogo
+          :size="32"
+          name-class="font-bold text-sm text-white"
+          :show-tagline="!!auth.org?.name"
+          :tagline="auth.org?.name || ''"
+          tagline-class="text-xs text-slate-400 truncate max-w-[160px]"
+        />
       </div>
 
       <!-- Nav -->
@@ -101,6 +103,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useDemoStore } from '@/stores/demo'
 import NavItem from '@/components/NavItem.vue'
+import BrandLogo from '@/components/BrandLogo.vue'
 import DemoTour from '@/components/DemoTour.vue'
 import {
   HomeIcon, CalendarDaysIcon, UserIcon, ClipboardDocumentListIcon,

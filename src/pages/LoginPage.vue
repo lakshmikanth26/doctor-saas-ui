@@ -11,10 +11,8 @@
         style="background:radial-gradient(circle,#06b6d4,transparent)"></div>
 
       <!-- Logo -->
-      <div class="flex items-center gap-3 relative">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-lg"
-          style="background:linear-gradient(135deg,#2563eb,#1d4ed8); box-shadow:0 4px 16px rgba(37,99,235,0.4)">C</div>
-        <span class="text-white font-black text-xl">Clinova</span>
+      <div class="relative">
+        <BrandLogo :size="40" />
       </div>
 
       <!-- Middle copy -->
@@ -61,10 +59,8 @@
       <div class="w-full max-w-sm">
 
         <!-- Mobile logo -->
-        <div class="flex items-center gap-3 mb-10 lg:hidden">
-          <div class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-white"
-            style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">C</div>
-          <span class="text-white font-black text-lg">Clinova</span>
+        <div class="mb-10 lg:hidden">
+          <BrandLogo :size="36" name-class="text-white font-black text-lg" />
         </div>
 
         <h1 class="text-3xl font-black text-white mb-1">Welcome back</h1>
@@ -121,6 +117,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import BrandLogo from '@/components/BrandLogo.vue'
 
 const auth = useAuthStore()
 const router = useRouter()

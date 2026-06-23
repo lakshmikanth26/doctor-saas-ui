@@ -5,10 +5,13 @@
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100 shadow-sm">
       <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xl font-black shadow-lg" :style="{ background: clinic.gradient }">
-            {{ clinic.emoji }}
-          </div>
-          <span class="text-xl font-black text-gray-900 tracking-tight">{{ clinic.brand }}</span>
+          <BrandLogo v-if="clinic.brand === 'Clinova'" :size="36" name-class="text-xl font-black text-gray-900 tracking-tight" :show-tagline="false" />
+          <template v-else>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xl font-black shadow-lg" :style="{ background: clinic.gradient }">
+              {{ clinic.emoji }}
+            </div>
+            <span class="text-xl font-black text-gray-900 tracking-tight">{{ clinic.brand }}</span>
+          </template>
         </div>
         <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
           <a href="#features" class="hover:text-gray-900 transition-colors">Features</a>
@@ -425,8 +428,11 @@
         <div class="grid md:grid-cols-4 gap-10 mb-12">
           <div>
             <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xl font-black" :style="{ background: clinic.gradient }">{{ clinic.emoji }}</div>
-              <span class="text-white font-black text-xl">{{ clinic.brand }}</span>
+              <BrandLogo v-if="clinic.brand === 'Clinova'" :size="36" name-class="text-white font-black text-xl" :show-tagline="false" />
+              <template v-else>
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white text-xl font-black" :style="{ background: clinic.gradient }">{{ clinic.emoji }}</div>
+                <span class="text-white font-black text-xl">{{ clinic.brand }}</span>
+              </template>
             </div>
             <p class="text-sm leading-relaxed">India's most affordable clinic management platform. Built for solo doctors and small clinics.</p>
           </div>
@@ -456,6 +462,7 @@ import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useDemoStore } from '@/stores/demo'
+import BrandLogo from '@/components/BrandLogo.vue'
 
 const route = useRoute()
 const router = useRouter()
