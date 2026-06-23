@@ -419,11 +419,13 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
+import { getApiBaseUrl } from '@/lib/apiBase.js'
 import { launchCashfreeCheckout } from '@/composables/useCashfree'
 import { localTodayIso, normalizeSlots, generateDefaultSlots, isPastSlot } from '@/lib/slots'
 
 const route   = useRoute()
 const router  = useRouter()
+const apiBase = getApiBaseUrl()
 const orgSlug = computed(() => route.params.orgSlug || (localStorage.getItem('demo_mode') ? 'city-medical-demo' : ''))
 const slugInput = ref('')
 const slugError = ref('')
@@ -564,7 +566,7 @@ const DEMO_QUEUE = [
 async function loadDoctors() {
   if (!orgSlug.value) { doctors.value = []; return }
   if (localStorage.getItem('demo_mode')) { doctors.value = DEMO_DOCTORS; return }
-  const { data } = await axios.get('/api/v1/staff', {
+  const { data } = await axios.get(`${apiBase}/staff`, {
     params: { limit: 50, orgSlug: orgSlug.value },
   }).catch(() => ({ data: { data: { staff: [] } } }))
   doctors.value = (data.data?.staff || []).filter(s => s.role === 'DOCTOR' || s.staffProfile?.specialization)
@@ -581,7 +583,7 @@ async function loadSlots() {
     return
   }
   try {
-    const { data } = await axios.get('/api/v1/appointments/slots', {
+    const { data } = await axios.get(`${apiBase}/appointments/slots`, {
       params: {
         date: form.value.scheduledDate,
         doctorId: form.value.doctorId || undefined,
@@ -640,7 +642,7 @@ async function bookAppointment() {
     bookLoading.value = false; return
   }
   try {
-    const { data } = await axios.post('/api/v1/appointments/public', {
+    const { data } = await axios.post(`${apiBase}/appointments/public`, {
       ...form.value,
       orgSlug: orgSlug.value,
       paymentMode: payment.value.mode,
@@ -652,7 +654,7 @@ async function bookAppointment() {
     bookedToken.value = data.data?.tokenNumber || data.data?.appointment?.tokenNumber || '01'
 
     if (payment.value.mode === 'PAY_NOW') {
-      const orderRes = await axios.post('/api/v1/payments/cashfree/public/create-order', {
+      const orderRes = await axios.post(`${apiBase}/payments/cashfree/public/create-order`, {
         amount: portalTotalFee.value,
         appointmentId,
         orgSlug: orgSlug.value,
@@ -708,7 +710,7 @@ const myPosition             = computed(() => {
 async function loadPublicQueue() {
   if (localStorage.getItem('demo_mode')) { publicQueue.value = [...DEMO_QUEUE]; return }
   const slug = orgSlug.value
-  const { data } = await axios.get(slug ? `/api/v1/appointments/queue/public?orgSlug=${slug}` : '/api/v1/appointments/queue/public')
+  const { data } = await axios.get(slug ? `${apiBase}/appointments/queue/public?orgSlug=${slug}` : `${apiBase}/appointments/queue/public`)
     .catch(() => ({ data: { data: [] } }))
   publicQueue.value = data.data || []
 }
@@ -732,7 +734,7 @@ async function loadPortalData() {
     ensurePayNowFeeSelection()
     return
   }
-  axios.get(`/api/v1/fees/public?orgSlug=${orgSlug.value}`)
+  axios.get(`${apiBase}/fees/public?orgSlug=${orgSlug.value}`)
     .then(r => {
       portalFees.value = r.data.data || []
       ensurePayNowFeeSelection()

@@ -40,6 +40,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import { getApiBaseUrl } from '@/lib/apiBase.js'
 
 const route   = useRoute()
 const loading = ref(true)
@@ -50,7 +51,7 @@ onMounted(async () => {
   orderId.value = route.query.order_id || ''
   if (!orderId.value) { status.value = 'ERROR'; loading.value = false; return }
   try {
-    const { data } = await axios.get(`/api/v1/payments/cashfree/verify?order_id=${encodeURIComponent(orderId.value)}`)
+    const { data } = await axios.get(`${getApiBaseUrl()}/payments/cashfree/verify?order_id=${encodeURIComponent(orderId.value)}`)
     status.value = data.data?.status || 'UNKNOWN'
   } catch {
     status.value = 'ERROR'

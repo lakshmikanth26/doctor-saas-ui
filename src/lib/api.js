@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { getApiBaseUrl } from './apiBase.js'
 
 const api = axios.create({
-  baseURL: '/api/v1',
+  baseURL: getApiBaseUrl(),
   timeout: 15000,
 })
 
@@ -23,7 +24,7 @@ api.interceptors.response.use(
       if (localStorage.getItem('demo_mode')) return Promise.reject(err)
       try {
         const refresh = localStorage.getItem('refresh_token')
-        const { data } = await axios.post('/api/v1/auth/refresh', { refreshToken: refresh })
+        const { data } = await axios.post(`${getApiBaseUrl()}/auth/refresh`, { refreshToken: refresh })
         localStorage.setItem('access_token', data.data.accessToken)
         localStorage.setItem('refresh_token', data.data.refreshToken)
         original.headers.Authorization = `Bearer ${data.data.accessToken}`

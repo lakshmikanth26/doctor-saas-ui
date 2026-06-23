@@ -11,8 +11,9 @@ export default defineConfig({
     port: parseInt(process.env.PORT) || 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3004',
+        target: process.env.VITE_API_PROXY || 'https://doctor-saas-gamma.vercel.app',
         changeOrigin: true,
+        secure: true,
       },
     },
   },

@@ -100,6 +100,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import { getApiBaseUrl } from '@/lib/apiBase.js'
 
 const route = useRoute()
 const queue = ref([])
@@ -132,7 +133,8 @@ async function loadQueue() {
     return
   }
   const orgSlug = route.params.orgSlug
-  const url = orgSlug ? `/api/v1/appointments/queue/public?orgSlug=${orgSlug}` : '/api/v1/appointments/queue/public'
+  const base = getApiBaseUrl()
+  const url = orgSlug ? `${base}/appointments/queue/public?orgSlug=${orgSlug}` : `${base}/appointments/queue/public`
   const { data } = await axios.get(url).catch(() => ({ data: { data: [] } }))
   queue.value = data.data || []
 }

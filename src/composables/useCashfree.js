@@ -1,5 +1,6 @@
 import api from '@/lib/api'
 import axios from 'axios'
+import { getApiBaseUrl } from '@/lib/apiBase.js'
 
 const SDK_URL = 'https://sdk.cashfree.com/js/v3/cashfree.js'
 const CF_ENV = import.meta.env.VITE_CASHFREE_ENV || 'sandbox'
@@ -33,7 +34,7 @@ async function initCashfree() {
 async function verifyOrder(orderId, { publicApi = false } = {}) {
   const path = `/payments/cashfree/verify?order_id=${encodeURIComponent(orderId)}`
   if (publicApi) {
-    const { data } = await axios.get(`/api/v1${path}`)
+    const { data } = await axios.get(`${getApiBaseUrl()}${path}`)
     return data.data?.status
   }
   const { data } = await api.get(path)
