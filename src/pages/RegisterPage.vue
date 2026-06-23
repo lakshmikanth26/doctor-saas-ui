@@ -10,11 +10,11 @@
       <div class="flex items-center gap-3 relative">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-lg"
           style="background:linear-gradient(135deg,#2563eb,#1d4ed8); box-shadow:0 4px 16px rgba(37,99,235,0.4)">C</div>
-        <span class="text-white font-black text-xl">Mednest</span>
+        <span class="text-white font-black text-xl">Clinova</span>
       </div>
 
       <div class="relative">
-        <p class="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-4">Free 14-day trial</p>
+        <p class="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-4">A new generation of clinical care</p>
         <h2 class="text-4xl font-black text-white leading-tight mb-6">
           Set up your<br/>clinic in<br/><span style="color:#34d399">under 5 minutes.</span>
         </h2>
@@ -31,7 +31,7 @@
       </div>
 
       <div class="relative p-4 rounded-2xl" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07)">
-        <p class="text-slate-300 text-sm italic">"Mednest cut our appointment chaos by 80%. The queue display alone saved us 2 staff hours a day."</p>
+        <p class="text-slate-300 text-sm italic">"Clinova cut our appointment chaos by 80%. The queue display alone saved us 2 staff hours a day."</p>
         <p class="text-slate-500 text-xs mt-3">— Dr. Priya Sharma, City Dental Care</p>
       </div>
     </div>
@@ -44,7 +44,7 @@
         <div class="flex items-center gap-3 mb-8 lg:hidden">
           <div class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-white"
             style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">C</div>
-          <span class="text-white font-black text-lg">Mednest</span>
+          <span class="text-white font-black text-lg">Clinova</span>
         </div>
 
         <h1 class="text-3xl font-black text-white mb-1">Register your Clinic</h1>

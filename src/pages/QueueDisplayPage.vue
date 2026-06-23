@@ -91,7 +91,7 @@
         <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block"></span>
         Auto-refreshes every 30 seconds
       </span>
-      <span>Powered by <span class="text-slate-400 font-semibold">Mednest</span></span>
+      <span>Powered by <span class="text-slate-400 font-semibold">Clinova</span></span>
     </footer>
   </div>
 </template>
@@ -129,7 +129,7 @@ const DEMO_QUEUE = [
 async function loadQueue() {
   if (localStorage.getItem('demo_mode')) {
     queue.value = DEMO_QUEUE
-    clinicName.value = 'Mednest Demo Clinic'
+    clinicName.value = 'Clinova Demo Clinic'
     return
   }
   const orgSlug = route.params.orgSlug

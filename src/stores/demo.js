@@ -15,7 +15,7 @@ export const DEMO_STEPS = [
     path: '/patients/new',
     icon: '👤',
     title: 'Patient Registration — Under 60 seconds',
-    insight: `Adding a patient takes less than a minute. Mednest auto-generates a unique MRN (Medical Record Number) so you never duplicate records. Enter name, phone, date of birth, and optional details like blood group and emergency contact — that's it.`,
+    insight: `Adding a patient takes less than a minute. Clinova auto-generates a unique MRN (Medical Record Number) so you never duplicate records. Enter name, phone, date of birth, and optional details like blood group and emergency contact — that's it.`,
     tip: 'Tip: Phone number doubles as the login for patient portal access (coming soon).',
     mockFill: {
       firstName: 'Priya',
@@ -41,7 +41,7 @@ export const DEMO_STEPS = [
     path: '/appointments/new',
     icon: '📅',
     title: 'Appointments — Smart scheduling that runs itself',
-    insight: `Book appointments in 3 clicks: pick the patient, choose a doctor, and select an open slot. Mednest automatically assigns a token number and sends an SMS confirmation. The patient can check their queue position from home before leaving.`,
+    insight: `Book appointments in 3 clicks: pick the patient, choose a doctor, and select an open slot. Clinova automatically assigns a token number and sends an SMS confirmation. The patient can check their queue position from home before leaving.`,
     tip: 'Tip: Set doctor working hours in Settings → Staff to control which slots appear.',
     mockFill: {
       type: 'SCHEDULED',
@@ -85,7 +85,7 @@ export const DEMO_STEPS = [
     path: '/inventory',
     icon: '📦',
     title: 'Inventory — Never run out again',
-    insight: `Track every medicine, consumable, and equipment item. Set a reorder level and Mednest automatically flags items that need restocking. Every prescription auto-deducts from inventory so your stock count is always accurate without manual counting.`,
+    insight: `Track every medicine, consumable, and equipment item. Set a reorder level and Clinova automatically flags items that need restocking. Every prescription auto-deducts from inventory so your stock count is always accurate without manual counting.`,
     tip: 'Tip: The Low Stock tab shows only items below reorder level — check it every Monday morning.',
   },
   {
@@ -101,7 +101,7 @@ export const DEMO_STEPS = [
     path: '/website',
     icon: '🌐',
     title: 'Website Builder — Your clinic, online in 5 minutes',
-    insight: `Every clinic on Mednest gets a free public website at yourclinic.mednest.app. Add your services, team, gallery, and a blog. Patients can book appointments directly from your website. No developer or hosting costs — ever.`,
+    insight: `Every clinic on Clinova gets a free public website at yourclinic.clinova.app. Add your services, team, gallery, and a blog. Patients can book appointments directly from your website. No developer or hosting costs — ever.`,
     tip: 'Tip: Add a WhatsApp button to your website — it\'s the #1 driver of new patient inquiries in India.',
   },
   {

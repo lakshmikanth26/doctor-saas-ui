@@ -8,8 +8,8 @@
           <div class="w-9 h-9 rounded-xl flex items-center justify-center text-white font-black text-base"
             style="background:linear-gradient(135deg,#2563eb,#1d4ed8); box-shadow:0 4px 12px rgba(37,99,235,0.35)">C</div>
           <div>
-            <div class="text-white font-black text-base leading-none">Mednest</div>
-            <div class="text-slate-400 text-xs mt-0.5">{{ orgSlug ? `Booking · ${orgSlug}` : 'Patient Portal' }}</div>
+            <div class="text-white font-black text-base leading-none">Clinova</div>
+            <div class="text-slate-400 text-xs mt-0.5">{{ orgSlug ? `Booking · ${orgSlug}` : 'A new generation of clinical care' }}</div>
           </div>
         </div>
         <div class="text-right">
@@ -409,7 +409,7 @@
       </template>
 
       <p class="text-center text-slate-700 text-xs pt-10">
-        Powered by <span class="text-slate-500 font-semibold">Mednest</span> · Patient data is private & encrypted
+        Powered by <span class="text-slate-500 font-semibold">Clinova</span> · Patient data is private & encrypted
       </p>
     </div>
   </div>

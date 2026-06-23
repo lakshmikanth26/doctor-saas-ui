@@ -17,9 +17,9 @@
     >
       <!-- Logo -->
       <div class="flex items-center gap-3 px-6 py-5 border-b" style="border-color:rgba(255,255,255,0.06)">
-        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-sm">M</div>
+        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-sm">C</div>
         <div>
-          <div class="font-bold text-sm">Mednest</div>
+          <div class="font-bold text-sm">Clinova</div>
           <div class="text-xs text-slate-400 truncate max-w-[120px]">{{ auth.org?.name }}</div>
         </div>
       </div>

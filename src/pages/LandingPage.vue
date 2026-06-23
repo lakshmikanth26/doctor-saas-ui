@@ -75,7 +75,7 @@
               <div class="flex -space-x-2">
                 <div v-for="(c, i) in avatarColors" :key="i" class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold" :style="{ background: c }">{{ avatarInitials[i] }}</div>
               </div>
-              <span><strong class="text-gray-800">500+</strong> clinics trust Mednest</span>
+              <span><strong class="text-gray-800">500+</strong> clinics trust Clinova</span>
               <span class="hidden sm:flex items-center gap-1">⭐⭐⭐⭐⭐ <strong class="text-gray-800">4.9/5</strong></span>
             </div>
           </div>
@@ -88,7 +88,7 @@
                 <div class="w-3 h-3 rounded-full bg-red-500"></div>
                 <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                <div class="flex-1 mx-4 bg-gray-800 rounded-lg px-3 py-1 text-xs text-gray-400 text-center">app.mednest.in/dashboard</div>
+                <div class="flex-1 mx-4 bg-gray-800 rounded-lg px-3 py-1 text-xs text-gray-400 text-center">app.clinova.app/dashboard</div>
               </div>
               <!-- App content -->
               <div class="flex h-[420px]">
@@ -356,7 +356,7 @@
     <section class="py-24 px-6" :style="{ background: clinic.color + '06' }">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-black text-gray-900 mb-4">Doctors love Mednest</h2>
+          <h2 class="text-4xl font-black text-gray-900 mb-4">Doctors love Clinova</h2>
           <p class="text-xl text-gray-500">Real feedback from {{ clinic.specialty }} clinics across India</p>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
@@ -401,7 +401,7 @@
       <div class="max-w-3xl mx-auto">
         <div class="text-6xl mb-6">{{ clinic.emoji }}</div>
         <h2 class="text-5xl font-black text-gray-900 mb-6">Ready to modernise your {{ clinic.specialty }} clinic?</h2>
-        <p class="text-xl text-gray-500 mb-10">Join 500+ clinics already saving 2 hours a day with Mednest. Setup takes under 10 minutes.</p>
+        <p class="text-xl text-gray-500 mb-10">Join 500+ clinics already saving 2 hours a day with Clinova. Setup takes under 10 minutes.</p>
         <div class="flex flex-wrap gap-4 justify-center">
           <button @click="startDemo" :disabled="demoLoading"
             class="inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-white font-black text-xl shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all disabled:opacity-70"
@@ -438,7 +438,7 @@
           </div>
         </div>
         <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-          <span>© 2025 Mednest. All rights reserved.</span>
+          <span>© 2025 Clinova. All rights reserved.</span>
           <div class="flex gap-6">
             <span class="hover:text-white cursor-pointer">Privacy Policy</span>
             <span class="hover:text-white cursor-pointer">Terms of Service</span>
@@ -551,14 +551,14 @@ const CLINIC_CONFIGS = {
     queueNames: ['Client #08', 'Client #09', 'Client #10'],
   },
   default: {
-    brand: 'Mednest', emoji: '⚕️', color: '#2563eb',
+    brand: 'Clinova', emoji: '⚕️', color: '#2563eb',
     gradient: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
-    badge: 'The #1 Clinic Management Platform in India',
+    badge: 'A new generation of clinical care',
     headline: 'Run a smarter clinic.', headlineSub: 'Delight every patient.',
     subtext: 'Appointments, EMR, billing, prescriptions, inventory, staff, and your own website — managed from one elegant dashboard.',
     featuresSubtext: 'Everything a modern clinic needs, without the enterprise price tag.',
     specialty: 'medical', demoName: 'City Medical Center', demoDoc: 'Lakshmi',
-    tagline: 'Compassionate care, powered by technology', revenue: '31,200',
+    tagline: 'A new generation of clinical care', revenue: '31,200',
     smsName: 'Rahul', queuePatient1: 'Rahul Sharma',
     queueNames: ['Priya K.', 'Suresh M.', 'Ananya R.'],
   },
@@ -659,7 +659,7 @@ const modules = computed(() => [
     title: 'Your clinic online in 5 minutes.',
     desc: 'Build a professional clinic website with your branding, services, blog, and online booking — no developer needed.',
     points: [
-      'Custom subdomain (yourclinic.mednest.app) in seconds',
+      'Custom subdomain (yourclinic.clinova.app) in seconds',
       'Drag-and-drop page builder with pre-built healthcare templates',
       'Blog for health tips that bring Google traffic',
       'Patients book directly from your website',
@@ -723,7 +723,7 @@ const pricing = [
 const testimonials = computed(() => [
   {
     name: 'Dr. Suresh Nair', role: `${clinic.value.specialty.charAt(0).toUpperCase() + clinic.value.specialty.slice(1)} Specialist, Kochi`,
-    text: "Mednest cut our patient wait time in half. The live queue display is the best feature — patients actually come on time now because they can track their token from home.",
+    text: "Clinova cut our patient wait time in half. The live queue display is the best feature — patients actually come on time now because they can track their token from home.",
   },
   {
     name: 'Dr. Ananya Krishnan', role: 'General Practitioner, Chennai',
@@ -738,7 +738,7 @@ const testimonials = computed(() => [
 // ── FAQ ────────────────────────────────────────────────────────────────────
 const faqs = reactive([
   { q: 'Is my patient data safe and private?', a: 'Absolutely. All data is stored encrypted on Supabase (SOC 2 compliant), transmitted over HTTPS, and isolated per clinic — no other clinic can ever see your data. We never sell or share patient data.', open: false },
-  { q: 'Do I need to install anything?', a: 'No. Mednest is fully web-based. Works on any computer, tablet, or phone browser. Your staff don\'t need to install anything — just log in.', open: false },
+  { q: 'Do I need to install anything?', a: 'No. Clinova is fully web-based. Works on any computer, tablet, or phone browser. Your staff don\'t need to install anything — just log in.', open: false },
   { q: 'Can I import my existing patient records?', a: 'Yes. We provide a CSV import tool for patient data and can help you migrate from common systems like Practo, eVital, or Excel sheets. Our team assists during onboarding.', open: false },
   { q: 'What happens after the 14-day trial?', a: 'You choose a plan that fits your clinic and continue. We\'ll remind you before the trial ends. If you don\'t upgrade, your account is paused (data preserved) for 30 days.', open: false },
   { q: 'Does it work for multi-branch clinics?', a: 'Yes. The Growth and Scale plans support multiple branches with separate staff, inventory, and queues — all manageable from one login with branch-level access control.', open: false },
