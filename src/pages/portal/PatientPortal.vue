@@ -566,7 +566,7 @@ const DEMO_QUEUE = [
 async function loadDoctors() {
   if (!orgSlug.value) { doctors.value = []; return }
   if (localStorage.getItem('demo_mode')) { doctors.value = DEMO_DOCTORS; return }
-  const { data } = await axios.get(`${apiBase}/staff`, {
+  const { data } = await axios.get(`${apiBase}/staff/public`, {
     params: { limit: 50, orgSlug: orgSlug.value },
   }).catch(() => ({ data: { data: { staff: [] } } }))
   doctors.value = (data.data?.staff || []).filter(s => s.role === 'DOCTOR' || s.staffProfile?.specialization)
@@ -583,7 +583,7 @@ async function loadSlots() {
     return
   }
   try {
-    const { data } = await axios.get(`${apiBase}/appointments/slots`, {
+    const { data } = await axios.get(`${apiBase}/appointments/slots/public`, {
       params: {
         date: form.value.scheduledDate,
         doctorId: form.value.doctorId || undefined,
