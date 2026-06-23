@@ -1,0 +1,47 @@
+src/stores/demo.js
+  1676d769c1495538 109
+src/pages/DashboardPage.vue
+  1676d769c1495538 197
+src/pages/PaymentStatusPage.vue
+  1676d769c1495538 42,53
+src/composables/useCashfree.js
+  1676d769c1495538 1-3,5,12-15,18,25,27-64,66,68-84
+src/lib/slots.js
+  1676d769c1495538 1-47
+src/pages/appointments/AppointmentFormPage.vue
+  85fae2d6518ebe69 78,316,337,426-427,510-520,566-575,581-585,587,619
+  1676d769c1495538 181-183,303,307,312,390-391,393,395-397,402-406,481-483,491-492,496-503,537,554-565,577-579,593,601-616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "21264dbf539df6a5eb311ce9d3ac16e4eada435e",
+  "prompts": {
+    "1676d769c1495538": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "37643a25-050a-4a44-91f9-294760856c0d",
+        "model": "composer-2.5"
+      },
+      "human_author": "Lakshmikanth <lakshmikanth.d@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 385,
+      "total_deletions": 110,
+      "accepted_lines": 186,
+      "overriden_lines": 0
+    },
+    "85fae2d6518ebe69": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c7da7977-7859-4fb5-8e6f-d2691630c4d0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Lakshmikanth <lakshmikanth.d@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 35,
+      "total_deletions": 14,
+      "accepted_lines": 33,
+      "overriden_lines": 2
+    }
+  }
+}
